@@ -177,8 +177,8 @@ function Hero() {
 
         {/* Right: code card + avatar */}
         <div className="relative animate-fade-in">
-          <div className="relative mx-auto max-w-md">
-            <div className="absolute -inset-6 bg-gradient-to-tr from-primary/50 to-accent/50 blur-3xl opacity-60 rounded-[2rem]" />
+          <div className="relative mx-auto w-full max-w-xl lg:max-w-2xl">
+            <div className="absolute -inset-8 bg-gradient-to-tr from-primary/50 to-accent/50 blur-3xl opacity-60 rounded-[2.5rem]" />
 
             {/* Avatar card */}
             <div className="relative glass rounded-3xl p-3 overflow-hidden">
@@ -188,11 +188,11 @@ function Hero() {
                   alt="Yousef Aldeeb"
                   width={768}
                   height={768}
-                  className="w-full aspect-square object-cover"
+                  className="w-full h-full aspect-square object-cover scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                   <div>
                     <div className="mono text-[10px] uppercase tracking-widest text-primary">Currently</div>
                     <div className="text-sm font-medium">Royal Scientific Society</div>
