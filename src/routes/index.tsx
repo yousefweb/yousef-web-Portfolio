@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   ArrowRight, Download, Mail, Github, Linkedin, MapPin, Phone,
   Code2, Database, Server, Layers, Briefcase, GraduationCap,
-  ExternalLink, CheckCircle2, Menu, X, Award, Sparkles, Terminal, Zap,
+  ExternalLink, CheckCircle2, Menu, X, Award, Sparkles, Zap,
 } from "lucide-react";
 import avatar from "@/assets/yousef-avatar-dark.jpg";
 
@@ -221,24 +221,6 @@ function Hero() {
               </div>
             </div>
 
-            {/* Terminal card */}
-            <div className="mt-6 glass rounded-2xl overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/60 bg-background/40">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-                <div className="ml-2 flex items-center gap-1.5 mono text-[11px] text-muted-foreground">
-                  <Terminal className="h-3 w-3" /> yousef@dev — zsh
-                </div>
-              </div>
-              <pre className="mono text-[12px] leading-relaxed p-4 text-muted-foreground">
-<span className="text-primary">$</span> dotnet new webapi -n YousefApi
-<span className="text-emerald-400">✓</span> Project created
-<span className="text-primary">$</span> dotnet ef migrations add Init
-<span className="text-emerald-400">✓</span> Build succeeded · 0 warnings
-<span className="text-primary">$</span> _
-              </pre>
-            </div>
           </div>
         </div>
       </div>
