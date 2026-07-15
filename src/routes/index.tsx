@@ -188,7 +188,7 @@ function Hero() {
                   alt="Yousef Aldeeb"
                   width={768}
                   height={768}
-                  className="w-full aspect-square object-cover mix-blend-multiply brightness-125 contrast-110 saturate-110"
+                  className="w-full aspect-square object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
