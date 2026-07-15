@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   ArrowRight, Download, Mail, Github, Linkedin, MapPin, Phone,
   Code2, Database, Server, Layers, Briefcase, GraduationCap,
-  ExternalLink, CheckCircle2, Menu, X, Award, Sparkles,
+  ExternalLink, CheckCircle2, Menu, X, Award, Sparkles, Terminal, Zap,
 } from "lucide-react";
 import avatar from "@/assets/yousef-avatar.jpg";
 
@@ -95,68 +95,157 @@ function Nav({ open, setOpen, active }: { open: boolean; setOpen: (b: boolean) =
 }
 
 function Hero() {
+  const stack = ["ASP.NET Core", "C#", "EF Core", "Web API", "SQL Server", "Oracle", "JavaScript", "Bootstrap"];
   return (
-    <section id="home" className="relative pt-36 pb-24 overflow-hidden">
-      <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-primary/20 blur-3xl animate-blob" />
-      <div className="absolute top-40 -right-24 h-96 w-96 rounded-full bg-accent/20 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
-      <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-14 items-center relative">
+    <section id="home" className="relative pt-32 pb-20 overflow-hidden">
+      {/* Grid background */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.18] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]"
+        style={{
+          backgroundImage:
+            "linear-gradient(oklch(0.72 0.17 240 / 0.25) 1px, transparent 1px), linear-gradient(90deg, oklch(0.72 0.17 240 / 0.25) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+      />
+      <div className="absolute -top-32 -left-24 h-[28rem] w-[28rem] rounded-full bg-primary/25 blur-3xl animate-blob" />
+      <div className="absolute top-40 -right-24 h-[28rem] w-[28rem] rounded-full bg-accent/25 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
+
+      <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-[1.1fr_1fr] gap-14 items-center relative">
+        {/* Left: copy */}
         <div className="animate-fade-in">
-          <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs text-muted-foreground mono">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            Available for opportunities
+          <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs mono">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            <span className="text-muted-foreground">Available for opportunities</span>
+            <span className="text-border">·</span>
+            <span className="text-primary">Amman, JO</span>
           </div>
-          <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05]">
-            Hi, I'm <span className="text-gradient">Yousef Aldeeb</span>
+
+          <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-tight">
+            Hi, I'm <br className="hidden md:block" />
+            <span className="text-gradient">Yousef Aldeeb</span>
           </h1>
-          <p className="mt-4 text-xl md:text-2xl text-muted-foreground">
-            ASP.NET Full-Stack Developer
-          </p>
+
+          <div className="mt-5 flex items-center gap-3 text-lg md:text-xl">
+            <span className="mono text-primary">&gt;</span>
+            <span className="text-foreground/90">ASP.NET Full-Stack Developer</span>
+            <span className="inline-block h-5 w-[2px] bg-primary animate-pulse" />
+          </div>
+
           <p className="mt-6 max-w-xl text-muted-foreground leading-relaxed">
-            Software Engineering graduate from Jordan University of Science and Technology,
-            specializing in ASP.NET Core MVC, Entity Framework Core, Web APIs, and
-            database-driven applications. Passionate about creating efficient, scalable,
-            and impactful software solutions.
+            Software Engineering graduate from JUST, specializing in ASP.NET Core MVC,
+            Entity Framework Core, Web APIs, and database-driven applications. I build
+            efficient, scalable software that ships.
           </p>
+
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#projects" className="inline-flex items-center gap-2 rounded-xl bg-primary text-primary-foreground px-5 py-3 font-medium hover:opacity-90 glow transition">
-              View My Projects <ArrowRight className="h-4 w-4" />
+            <a href="#projects" className="group relative inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent text-primary-foreground px-5 py-3 font-medium glow transition hover:shadow-xl hover:-translate-y-0.5">
+              View My Projects
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
             </a>
-            <a href="/Yousef-Aldeeb-CV.pdf" className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 font-medium hover:bg-primary/10 transition">
+            <a href="/Yousef-Aldeeb-CV.pdf" className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 font-medium hover:bg-primary/10 hover:-translate-y-0.5 transition">
               <Download className="h-4 w-4" /> Download CV
             </a>
-            <a href="#contact" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-medium text-muted-foreground hover:text-foreground transition">
+            <a href="#contact" className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3 font-medium text-muted-foreground hover:text-foreground hover:border-primary transition">
               <Mail className="h-4 w-4" /> Contact Me
             </a>
           </div>
+
+          {/* Stats */}
+          <div className="mt-10 grid grid-cols-3 gap-4 max-w-md">
+            {[
+              { k: "2+", v: "Years experience" },
+              { k: "10+", v: "Projects shipped" },
+              { k: "3.25", v: "GPA · JUST" },
+            ].map((s) => (
+              <div key={s.v} className="glass rounded-xl px-4 py-3">
+                <div className="text-2xl font-bold text-gradient">{s.k}</div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">{s.v}</div>
+              </div>
+            ))}
+          </div>
+
           <div className="mt-8 flex items-center gap-4 text-muted-foreground">
-            <a href="https://github.com/yousefweb" target="_blank" rel="noreferrer" className="hover:text-primary transition"><Github /></a>
-            <a href="https://www.linkedin.com/in/yousef-al-deeb/" target="_blank" rel="noreferrer" className="hover:text-primary transition"><Linkedin /></a>
+            <a href="https://github.com/yousefweb" target="_blank" rel="noreferrer" aria-label="GitHub" className="glass rounded-lg p-2.5 hover:text-primary hover:-translate-y-0.5 transition"><Github className="h-4 w-4" /></a>
+            <a href="https://www.linkedin.com/in/yousef-al-deeb/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="glass rounded-lg p-2.5 hover:text-primary hover:-translate-y-0.5 transition"><Linkedin className="h-4 w-4" /></a>
             <span className="mono text-xs">github.com/yousefweb</span>
           </div>
         </div>
 
+        {/* Right: code card + avatar */}
         <div className="relative animate-fade-in">
           <div className="relative mx-auto max-w-md">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-primary to-accent blur-2xl opacity-40 rounded-3xl" />
-            <div className="relative glass rounded-3xl p-3">
-              <img src={avatar} alt="Yousef Aldeeb" width={768} height={768}
-                className="rounded-2xl w-full aspect-square object-cover" />
-              <div className="absolute -bottom-5 -left-5 glass rounded-xl px-4 py-3 animate-float">
-                <div className="flex items-center gap-2 mono text-xs">
-                  <Code2 className="h-4 w-4 text-primary" /> ASP.NET Core
-                </div>
-              </div>
-              <div className="absolute -top-5 -right-5 glass rounded-xl px-4 py-3 animate-float" style={{ animationDelay: "1s" }}>
-                <div className="flex items-center gap-2 mono text-xs">
-                  <Database className="h-4 w-4 text-accent" /> SQL / Oracle
-                </div>
-              </div>
-              <div className="absolute top-1/2 -right-8 glass rounded-xl px-4 py-3 animate-float" style={{ animationDelay: "2s" }}>
-                <div className="flex items-center gap-2 mono text-xs">
-                  <Server className="h-4 w-4 text-primary" /> Web API
+            <div className="absolute -inset-6 bg-gradient-to-tr from-primary/50 to-accent/50 blur-3xl opacity-60 rounded-[2rem]" />
+
+            {/* Avatar card */}
+            <div className="relative glass rounded-3xl p-3 overflow-hidden">
+              <div className="relative rounded-2xl overflow-hidden">
+                <img src={avatar} alt="Yousef Aldeeb" width={768} height={768}
+                  className="w-full aspect-square object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                  <div>
+                    <div className="mono text-[10px] uppercase tracking-widest text-primary">Currently</div>
+                    <div className="text-sm font-medium">Royal Scientific Society</div>
+                  </div>
+                  <span className="glass rounded-lg px-2 py-1 mono text-[10px] flex items-center gap-1">
+                    <Zap className="h-3 w-3 text-emerald-400" /> Online
+                  </span>
                 </div>
               </div>
             </div>
+
+            {/* Floating tech chips */}
+            <div className="absolute -bottom-6 -left-8 glass rounded-xl px-4 py-3 animate-float">
+              <div className="flex items-center gap-2 mono text-xs">
+                <Code2 className="h-4 w-4 text-primary" /> ASP.NET Core
+              </div>
+            </div>
+            <div className="absolute -top-6 -right-6 glass rounded-xl px-4 py-3 animate-float" style={{ animationDelay: "1s" }}>
+              <div className="flex items-center gap-2 mono text-xs">
+                <Database className="h-4 w-4 text-accent" /> SQL / Oracle
+              </div>
+            </div>
+            <div className="absolute top-1/2 -right-10 glass rounded-xl px-4 py-3 animate-float" style={{ animationDelay: "2s" }}>
+              <div className="flex items-center gap-2 mono text-xs">
+                <Server className="h-4 w-4 text-primary" /> Web API
+              </div>
+            </div>
+
+            {/* Terminal card */}
+            <div className="mt-6 glass rounded-2xl overflow-hidden">
+              <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/60 bg-background/40">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
+                <div className="ml-2 flex items-center gap-1.5 mono text-[11px] text-muted-foreground">
+                  <Terminal className="h-3 w-3" /> yousef@dev — zsh
+                </div>
+              </div>
+              <pre className="mono text-[12px] leading-relaxed p-4 text-muted-foreground">
+<span className="text-primary">$</span> dotnet new webapi -n YousefApi
+<span className="text-emerald-400">✓</span> Project created
+<span className="text-primary">$</span> dotnet ef migrations add Init
+<span className="text-emerald-400">✓</span> Build succeeded · 0 warnings
+<span className="text-primary">$</span> _
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Tech marquee */}
+      <div className="mt-16 relative">
+        <div className="glass border-x-0 rounded-none py-4 overflow-hidden">
+          <div className="flex gap-10 whitespace-nowrap animate-[marquee_28s_linear_infinite] mono text-sm text-muted-foreground">
+            {[...stack, ...stack, ...stack].map((s, i) => (
+              <span key={i} className="flex items-center gap-3">
+                <Sparkles className="h-3.5 w-3.5 text-primary" /> {s}
+              </span>
+            ))}
           </div>
         </div>
       </div>
