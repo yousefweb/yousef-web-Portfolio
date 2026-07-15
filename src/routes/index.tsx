@@ -182,10 +182,16 @@ function Hero() {
 
             {/* Avatar card */}
             <div className="relative glass rounded-3xl p-3 overflow-hidden">
-              <div className="relative rounded-2xl overflow-hidden">
-                <img src={avatar} alt="Yousef Aldeeb" width={768} height={768}
-                  className="w-full aspect-square object-cover" />
+              <div className="relative rounded-2xl overflow-hidden bg-card">
+                <img
+                  src={avatar}
+                  alt="Yousef Aldeeb"
+                  width={768}
+                  height={768}
+                  className="w-full aspect-square object-cover mix-blend-multiply brightness-110 contrast-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                   <div>
                     <div className="mono text-[10px] uppercase tracking-widest text-primary">Currently</div>
