@@ -5,7 +5,7 @@ import {
   Code2, Database, Server, Layers, Briefcase, GraduationCap,
   ExternalLink, CheckCircle2, Menu, X, Award, Sparkles, Terminal, Zap,
 } from "lucide-react";
-import avatar from "@/assets/yousef-avatar.jpg";
+const avatar = "https://i.postimg.cc/1tyzhp13/Whats-App-Image-2026-07-15-at-10-42-58-PM.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
