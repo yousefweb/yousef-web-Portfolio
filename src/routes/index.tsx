@@ -111,7 +111,7 @@ function Hero() {
       <div className="absolute -top-32 -left-24 h-[28rem] w-[28rem] rounded-full bg-primary/25 blur-3xl animate-blob" />
       <div className="absolute top-40 -right-24 h-[28rem] w-[28rem] rounded-full bg-accent/25 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
 
-      <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-[1fr_1.35fr] gap-10 items-center relative">
+      <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] gap-10 items-center relative">
         {/* Left: copy */}
         <div className="animate-fade-in">
           <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs mono">
