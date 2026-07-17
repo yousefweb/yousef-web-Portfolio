@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+
+const EMAILJS_SERVICE_ID = "service_jctuqlo";
+const EMAILJS_TEMPLATE_ID = "template_klx8lgp";
+const EMAILJS_PUBLIC_KEY = "f2EGOXiRFdOAYEugn";
 import {
   ArrowRight, Download, Mail, Github, Linkedin, MapPin, Phone,
   Code2, Database, Server, Layers, Briefcase, GraduationCap,
