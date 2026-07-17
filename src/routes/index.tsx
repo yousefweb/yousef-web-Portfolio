@@ -111,7 +111,7 @@ function Hero() {
       <div className="absolute -top-32 -left-24 h-[28rem] w-[28rem] rounded-full bg-primary/25 blur-3xl animate-blob" />
       <div className="absolute top-40 -right-24 h-[28rem] w-[28rem] rounded-full bg-accent/25 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
 
-      <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-[1.1fr_1fr] gap-14 items-center relative">
+      <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] gap-10 items-center relative">
         {/* Left: copy */}
         <div className="animate-fade-in">
           <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs mono">
@@ -175,20 +175,21 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right: code card + avatar */}
-        <div className="relative animate-fade-in">
-          <div className="relative mx-auto w-full max-w-xl lg:max-w-2xl">
-            <div className="absolute -inset-8 bg-gradient-to-tr from-primary/50 to-accent/50 blur-3xl opacity-60 rounded-[2.5rem]" />
+        {/* Right: avatar */}
+        <div className="relative animate-fade-in min-w-0 lg:justify-self-end">
+          <div className="relative mx-auto w-full max-w-lg md:max-w-xl lg:max-w-2xl">
+            <div className="absolute -inset-10 bg-gradient-to-tr from-primary/50 to-accent/50 blur-3xl opacity-60 rounded-[2.5rem]" />
 
             {/* Avatar card */}
-            <div className="relative glass rounded-3xl p-3 overflow-hidden">
-              <div className="relative rounded-2xl overflow-hidden bg-card">
+            <div className="relative glass rounded-3xl p-2 overflow-hidden">
+              <div className="relative rounded-2xl overflow-hidden bg-card aspect-square">
                 <img
                   src={avatar}
                   alt="Yousef Aldeeb"
                   width={768}
                   height={768}
-                  className="w-full h-full aspect-square object-cover scale-110"
+                  className="w-full h-full object-cover object-[center_60%]"
+                  style={{ transform: "scale(1.28)", transformOrigin: "center 60%" }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
