@@ -176,19 +176,20 @@ function Hero() {
         </div>
 
         {/* Right: avatar */}
-        <div className="relative animate-fade-in lg:justify-self-end">
+        <div className="relative animate-fade-in min-w-0 lg:justify-self-end">
           <div className="relative mx-auto w-full max-w-lg md:max-w-xl lg:max-w-2xl">
             <div className="absolute -inset-10 bg-gradient-to-tr from-primary/50 to-accent/50 blur-3xl opacity-60 rounded-[2.5rem]" />
 
             {/* Avatar card */}
             <div className="relative glass rounded-3xl p-2 overflow-hidden">
-              <div className="relative rounded-2xl overflow-hidden bg-card">
+              <div className="relative rounded-2xl overflow-hidden bg-card aspect-square">
                 <img
                   src={avatar}
                   alt="Yousef Aldeeb"
                   width={768}
                   height={768}
-                  className="w-full h-full aspect-square object-cover scale-[1.45] object-[center_62%]"
+                  className="w-full h-full object-cover object-[center_60%]"
+                  style={{ transform: "scale(1.28)", transformOrigin: "center 60%" }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
