@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+
+const EMAILJS_SERVICE_ID = "service_jctuqlo";
+const EMAILJS_TEMPLATE_ID = "template_klx8lgp";
+const EMAILJS_PUBLIC_KEY = "f2EGOXiRFdOAYEugn";
 import {
   ArrowRight, Download, Mail, Github, Linkedin, MapPin, Phone,
   Code2, Database, Server, Layers, Briefcase, GraduationCap,
@@ -585,6 +590,30 @@ function Certificates() {
 }
 
 function Contact() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
+      setStatus("success");
+      formRef.current.reset();
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Failed to send message. Please try again.");
+    }
+  };
+
   return (
     <section id="contact" className="py-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -616,8 +645,7 @@ function Contact() {
               </div>
             </div>
 
-            <form onSubmit={(e) => { e.preventDefault(); window.location.href = "mailto:yousef.aldeeb11@gmail.com"; }}
-              className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <Field label="Name" name="name" placeholder="Your name" />
                 <Field label="Email" name="email" type="email" placeholder="you@example.com" />
@@ -625,12 +653,22 @@ function Contact() {
               <Field label="Subject" name="subject" placeholder="Project inquiry" />
               <div>
                 <label className="mono text-xs uppercase tracking-widest text-muted-foreground">Message</label>
-                <textarea rows={5} required placeholder="Tell me about your project…"
+                <textarea name="message" rows={5} required placeholder="Tell me about your project…"
                   className="mt-2 w-full rounded-xl bg-input/50 border border-border px-4 py-3 outline-none focus:border-primary transition" />
               </div>
-              <button type="submit" className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground px-5 py-3 font-medium hover:opacity-90 glow transition">
-                Send message <ArrowRight className="h-4 w-4" />
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground px-5 py-3 font-medium hover:opacity-90 glow transition disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {status === "sending" ? "Sending…" : (<>Send message <ArrowRight className="h-4 w-4" /></>)}
               </button>
+              {status === "success" && (
+                <p className="text-sm text-primary text-center">✓ Message sent! I'll get back to you soon.</p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-destructive text-center">{errorMsg || "Something went wrong. Please try again."}</p>
+              )}
             </form>
           </div>
         </div>
