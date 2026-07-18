@@ -5,6 +5,7 @@ import emailjs from "@emailjs/browser";
 const EMAILJS_SERVICE_ID = "service_jctuqlo";
 const EMAILJS_TEMPLATE_ID = "template_klx8lgp";
 const EMAILJS_PUBLIC_KEY = "f2EGOXiRFdOAYEugn";
+const CONTACT_EMAIL = "yousef.aldeeb11@gmail.com";
 import {
   ArrowRight, Download, Mail, Github, Linkedin, MapPin, Phone,
   Code2, Database, Server, Layers, Briefcase, GraduationCap,
@@ -601,15 +602,24 @@ function Contact() {
     setErrorMsg("");
     try {
       const fd = new FormData(formRef.current);
+      const name = String(fd.get("name") ?? "").trim();
+      const email = String(fd.get("email") ?? "").trim();
+      const subject = String(fd.get("subject") ?? "").trim();
+      const message = String(fd.get("message") ?? "").trim();
       const templateParams = {
         to_name: "Yousef",
-        to_email: "yousefaldeeb70@gmail.com",
-        from_name: String(fd.get("name") ?? ""),
-        from_email: String(fd.get("email") ?? ""),
-        subject: String(fd.get("subject") ?? ""),
-        title: String(fd.get("subject") ?? ""),
-        message: String(fd.get("message") ?? ""),
-        reply_to: String(fd.get("email") ?? ""),
+        to_email: CONTACT_EMAIL,
+        recipient_email: CONTACT_EMAIL,
+        email_to: CONTACT_EMAIL,
+        from_name: name,
+        name,
+        from_email: email,
+        email,
+        user_email: email,
+        subject,
+        title: subject,
+        message,
+        reply_to: email,
       };
       await emailjs.send(
         EMAILJS_SERVICE_ID,
@@ -621,7 +631,13 @@ function Contact() {
       formRef.current.reset();
     } catch (err) {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Failed to send message. Please try again.");
+      const emailError = err as { text?: string; message?: string; status?: number };
+      const message = emailError.text || emailError.message || "Failed to send message. Please try again.";
+      setErrorMsg(
+        message.toLowerCase().includes("recipients address is empty")
+          ? `EmailJS template setup error: set the template "To Email" field to ${CONTACT_EMAIL} or {{to_email}}.`
+          : message,
+      );
     }
   };
 
@@ -641,8 +657,8 @@ function Contact() {
                 I usually reply within 24 hours.
               </p>
               <div className="mt-8 space-y-4 text-sm">
-                <a href="mailto:yousef.aldeeb11@gmail.com" className="flex items-center gap-3 hover:text-primary transition">
-                  <Mail className="h-4 w-4 text-primary" /> yousef.aldeeb11@gmail.com
+                <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-3 hover:text-primary transition">
+                  <Mail className="h-4 w-4 text-primary" /> {CONTACT_EMAIL}
                 </a>
                 <a href="tel:+962795837513" className="flex items-center gap-3 hover:text-primary transition">
                   <Phone className="h-4 w-4 text-primary" /> +962 79 583 7513
