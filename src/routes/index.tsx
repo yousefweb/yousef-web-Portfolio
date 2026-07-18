@@ -631,7 +631,8 @@ function Contact() {
       formRef.current.reset();
     } catch (err) {
       setStatus("error");
-      const message = err instanceof Error ? err.message : "Failed to send message. Please try again.";
+      const emailError = err as { text?: string; message?: string; status?: number };
+      const message = emailError.text || emailError.message || "Failed to send message. Please try again.";
       setErrorMsg(
         message.toLowerCase().includes("recipients address is empty")
           ? `EmailJS template setup error: set the template "To Email" field to ${CONTACT_EMAIL} or {{to_email}}.`
