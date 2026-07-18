@@ -603,6 +603,7 @@ function Contact() {
       const fd = new FormData(formRef.current);
       const templateParams = {
         to_name: "Yousef",
+        to_email: "yousefaldeeb70@gmail.com",
         from_name: String(fd.get("name") ?? ""),
         from_email: String(fd.get("email") ?? ""),
         subject: String(fd.get("subject") ?? ""),
