@@ -600,10 +600,20 @@ function Contact() {
     setStatus("sending");
     setErrorMsg("");
     try {
-      await emailjs.sendForm(
+      const fd = new FormData(formRef.current);
+      const templateParams = {
+        to_name: "Yousef",
+        from_name: String(fd.get("name") ?? ""),
+        from_email: String(fd.get("email") ?? ""),
+        subject: String(fd.get("subject") ?? ""),
+        title: String(fd.get("subject") ?? ""),
+        message: String(fd.get("message") ?? ""),
+        reply_to: String(fd.get("email") ?? ""),
+      };
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        formRef.current,
+        templateParams,
         { publicKey: EMAILJS_PUBLIC_KEY },
       );
       setStatus("success");
