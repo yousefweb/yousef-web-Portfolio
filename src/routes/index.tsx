@@ -152,7 +152,13 @@ function Hero() {
               View My Projects
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
             </a>
-            <a href="/Yousef-Aldeeb-CV.pdf" className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 font-medium hover:bg-primary/10 hover:-translate-y-0.5 transition">
+            <a
+              href="https://drive.google.com/uc?export=download&id=1Nq2iGPBcOXLmN-_XBuqfud8C56za6qYE"
+              download
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 font-medium hover:bg-primary/10 hover:-translate-y-0.5 transition"
+            >
               <Download className="h-4 w-4" /> Download CV
             </a>
             <a href="#contact" className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3 font-medium text-muted-foreground hover:text-foreground hover:border-primary transition">
