@@ -598,6 +598,7 @@ function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const send = useServerFn(sendContactMessage);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -606,42 +607,21 @@ function Contact() {
     setErrorMsg("");
     try {
       const fd = new FormData(formRef.current);
-      const name = String(fd.get("name") ?? "").trim();
-      const email = String(fd.get("email") ?? "").trim();
-      const subject = String(fd.get("subject") ?? "").trim();
-      const message = String(fd.get("message") ?? "").trim();
-      const templateParams = {
-        to_name: "Yousef",
-        to_email: CONTACT_EMAIL,
-        recipient_email: CONTACT_EMAIL,
-        email_to: CONTACT_EMAIL,
-        from_name: name,
-        name,
-        from_email: email,
-        email,
-        user_email: email,
-        subject,
-        title: subject,
-        message,
-        reply_to: email,
-      };
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        { publicKey: EMAILJS_PUBLIC_KEY },
-      );
+      await send({
+        data: {
+          name: String(fd.get("name") ?? "").trim(),
+          email: String(fd.get("email") ?? "").trim(),
+          subject: String(fd.get("subject") ?? "").trim(),
+          message: String(fd.get("message") ?? "").trim(),
+          website: String(fd.get("website") ?? ""),
+        },
+      });
       setStatus("success");
       formRef.current.reset();
     } catch (err) {
       setStatus("error");
-      const emailError = err as { text?: string; message?: string; status?: number };
-      const message = emailError.text || emailError.message || "Failed to send message. Please try again.";
-      setErrorMsg(
-        message.toLowerCase().includes("recipients address is empty")
-          ? `EmailJS template setup error: set the template "To Email" field to ${CONTACT_EMAIL} or {{to_email}}.`
-          : message,
-      );
+      const e2 = err as { message?: string };
+      setErrorMsg(e2.message || "Failed to send message. Please try again.");
     }
   };
 
