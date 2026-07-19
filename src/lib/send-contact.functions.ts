@@ -6,11 +6,9 @@ const schema = z.object({
   email: z.string().trim().email().max(200),
   subject: z.string().trim().min(1).max(200),
   message: z.string().trim().min(1).max(5000),
-  // honeypot
-  website: z.string().max(0).optional(),
+  website: z.string().max(0).optional(), // honeypot
 });
 
-// simple in-memory rate limiter per IP (best-effort)
 const hits = new Map<string, { count: number; reset: number }>();
 const WINDOW_MS = 60_000;
 const MAX_PER_WINDOW = 3;
@@ -30,6 +28,10 @@ function rateLimit(ip: string): boolean {
 export const sendContactMessage = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => schema.parse(data))
   .handler(async ({ data }) => {
+    if (data.website && data.website.length > 0) {
+      return { ok: true as const };
+    }
+
     const { getRequestHeader } = await import("@tanstack/react-start/server");
     const ip =
       getRequestHeader("cf-connecting-ip") ||
@@ -43,6 +45,7 @@ export const sendContactMessage = createServerFn({ method: "POST" })
     const serviceId = process.env.EMAILJS_SERVICE_ID;
     const templateId = process.env.EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.EMAILJS_PUBLIC_KEY;
+    const privateKey = process.env.EMAILJS_PRIVATE_KEY;
     const toEmail = process.env.CONTACT_EMAIL;
 
     if (!serviceId || !templateId || !publicKey || !toEmail) {
@@ -67,15 +70,12 @@ export const sendContactMessage = createServerFn({ method: "POST" })
 
     const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Identify as a server-origin call
-        origin: "https://portfolio.server",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         service_id: serviceId,
         template_id: templateId,
         user_id: publicKey,
+        ...(privateKey ? { accessToken: privateKey } : {}),
         template_params: templateParams,
       }),
     });
