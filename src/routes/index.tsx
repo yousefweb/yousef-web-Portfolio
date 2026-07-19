@@ -274,10 +274,16 @@ function About() {
         <div className="mt-12 grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 glass rounded-2xl p-8">
             <p className="text-muted-foreground leading-relaxed">
-              Software Engineering graduate from Jordan University of Science and Technology (2023)
-              with a Very Good grade and GPA 3.25. Experienced in ASP.NET Web Development with
-              strong knowledge of Object-Oriented Programming concepts, MVC architecture,
-              Entity Framework Core, and both database-first and code-first approaches.
+              Software Engineer with hands-on experience in designing, developing, and maintaining
+              enterprise web applications using ASP.NET Core, ASP.NET MVC, C#, and Entity Framework,
+              and currently working as a Full Stack Developer at the Royal Scientific Society (RSS),
+              contributing to the development and enhancement of an enterprise academic management system.
+              Experienced in both Code First and Database First development approaches, with strong
+              knowledge of Microsoft SQL Server and Oracle Database. Skilled in analyzing business
+              requirements, developing scalable features, troubleshooting complex issues, and
+              collaborating within Agile development teams. Passionate about building secure,
+              high-performance web applications while continuously learning modern technologies and
+              software engineering best practices.
             </p>
             <div className="mt-8 grid sm:grid-cols-2 gap-3">
               {strengths.map((s) => (
