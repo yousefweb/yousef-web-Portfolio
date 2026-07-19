@@ -153,8 +153,9 @@ function Hero() {
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
             </a>
             <a
-              href="/yousef-aldeeb-cv.pdf"
-              download="Yousef-Aldeeb-CV.pdf"
+              href="https://drive.google.com/uc?export=download&id=1Nq2iGPBcOXLmN-_XBuqfud8C56za6qYE"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 font-medium hover:bg-primary/10 hover:-translate-y-0.5 transition"
             >
               <Download className="h-4 w-4" /> Download CV
