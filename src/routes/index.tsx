@@ -657,6 +657,14 @@ function Contact() {
             </div>
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
               <div className="grid sm:grid-cols-2 gap-4">
                 <Field label="Name" name="name" placeholder="Your name" />
                 <Field label="Email" name="email" type="email" placeholder="you@example.com" />
