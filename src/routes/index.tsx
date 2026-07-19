@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+import { useServerFn } from "@tanstack/react-start";
+import { sendContactMessage } from "@/lib/send-contact.functions";
 
-const EMAILJS_SERVICE_ID = "service_jctuqlo";
-const EMAILJS_TEMPLATE_ID = "template_klx8lgp";
-const EMAILJS_PUBLIC_KEY = "f2EGOXiRFdOAYEugn";
 const CONTACT_EMAIL = "yousef.aldeeb11@gmail.com";
 import {
   ArrowRight, Download, Mail, Github, Linkedin, MapPin, Phone,
