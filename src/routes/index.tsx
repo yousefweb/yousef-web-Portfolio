@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+import { useServerFn } from "@tanstack/react-start";
+import { sendContactMessage } from "@/lib/send-contact.functions";
 
-const EMAILJS_SERVICE_ID = "service_jctuqlo";
-const EMAILJS_TEMPLATE_ID = "template_klx8lgp";
-const EMAILJS_PUBLIC_KEY = "f2EGOXiRFdOAYEugn";
 const CONTACT_EMAIL = "yousef.aldeeb11@gmail.com";
 import {
   ArrowRight, Download, Mail, Github, Linkedin, MapPin, Phone,
@@ -600,6 +598,7 @@ function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const send = useServerFn(sendContactMessage);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -608,42 +607,21 @@ function Contact() {
     setErrorMsg("");
     try {
       const fd = new FormData(formRef.current);
-      const name = String(fd.get("name") ?? "").trim();
-      const email = String(fd.get("email") ?? "").trim();
-      const subject = String(fd.get("subject") ?? "").trim();
-      const message = String(fd.get("message") ?? "").trim();
-      const templateParams = {
-        to_name: "Yousef",
-        to_email: CONTACT_EMAIL,
-        recipient_email: CONTACT_EMAIL,
-        email_to: CONTACT_EMAIL,
-        from_name: name,
-        name,
-        from_email: email,
-        email,
-        user_email: email,
-        subject,
-        title: subject,
-        message,
-        reply_to: email,
-      };
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        { publicKey: EMAILJS_PUBLIC_KEY },
-      );
+      await send({
+        data: {
+          name: String(fd.get("name") ?? "").trim(),
+          email: String(fd.get("email") ?? "").trim(),
+          subject: String(fd.get("subject") ?? "").trim(),
+          message: String(fd.get("message") ?? "").trim(),
+          website: String(fd.get("website") ?? ""),
+        },
+      });
       setStatus("success");
       formRef.current.reset();
     } catch (err) {
       setStatus("error");
-      const emailError = err as { text?: string; message?: string; status?: number };
-      const message = emailError.text || emailError.message || "Failed to send message. Please try again.";
-      setErrorMsg(
-        message.toLowerCase().includes("recipients address is empty")
-          ? `EmailJS template setup error: set the template "To Email" field to ${CONTACT_EMAIL} or {{to_email}}.`
-          : message,
-      );
+      const e2 = err as { message?: string };
+      setErrorMsg(e2.message || "Failed to send message. Please try again.");
     }
   };
 
@@ -679,6 +657,14 @@ function Contact() {
             </div>
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
               <div className="grid sm:grid-cols-2 gap-4">
                 <Field label="Name" name="name" placeholder="Your name" />
                 <Field label="Email" name="email" type="email" placeholder="you@example.com" />
