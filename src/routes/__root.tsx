@@ -78,12 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Yousef Aldeeb — ASP.NET Full-Stack Developer" },
-      { name: "description", content: "Portfolio of Yousef Mohammad Aldeeb, ASP.NET Core Full-Stack Developer building scalable web apps, APIs, and database solutions." },
+      { name: "description", content: "Portfolio of Yousef Mohammad Aldeeb — ASP.NET Core, Entity Framework, Web API, SQL/Oracle. Projects, experience, and contact." },
       { name: "author", content: "Yousef Mohammad Aldeeb" },
       { property: "og:title", content: "Yousef Aldeeb — ASP.NET Full-Stack Developer" },
-      { property: "og:description", content: "ASP.NET Core, Entity Framework, Web API, SQL/Oracle. Portfolio, projects and experience." },
+      { property: "og:description", content: "Portfolio of Yousef Mohammad Aldeeb — ASP.NET Core, Entity Framework, Web API, SQL/Oracle. Projects, experience, and contact." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Yousef Aldeeb — ASP.NET Full-Stack Developer" },
+      { name: "twitter:description", content: "Portfolio of Yousef Mohammad Aldeeb — ASP.NET Core, Entity Framework, Web API, SQL/Oracle. Projects, experience, and contact." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a62a1211-ad27-4db1-a7f9-b33cc19a3ed4/id-preview-aa9adb10--3732ad50-6ed7-456e-b39b-fdb2b35edce9.lovable.app-1784477289651.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a62a1211-ad27-4db1-a7f9-b33cc19a3ed4/id-preview-aa9adb10--3732ad50-6ed7-456e-b39b-fdb2b35edce9.lovable.app-1784477289651.png" },
     ],
     links: [
       {
