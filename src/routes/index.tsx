@@ -570,7 +570,6 @@ const CERTS: { name: string; meta?: string; href?: string }[] = [
   {
     name: "Professional Business Writing — Royal Scientific Society",
     meta: "10 training hours · Aug 2026",
-    href: "/professional-business-writing-certificate.pdf",
   },
   { name: "Coderz ASP.NET Core MVC Training" },
   { name: "Node.js Backend Training — Hope International" },
