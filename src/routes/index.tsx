@@ -565,16 +565,21 @@ function Projects() {
   );
 }
 
-const CERTS = [
-  "Bachelor Degree — Jordan University of Science and Technology",
-  "Coderz ASP.NET Core MVC Training",
-  "Node.js Backend Training — Hope International",
-  "Orange Coding School Certificate",
-  "Advanced Computer Skills",
-  "Entrepreneurship — Cisco Networking Academy",
-  "British Council Certificates",
-  "ISO 9001 Foundation Quality Certification",
-  "SQL Server Reporting Services (SSRS)",
+const CERTS: { name: string; meta?: string; href?: string }[] = [
+  { name: "Bachelor Degree — Jordan University of Science and Technology" },
+  {
+    name: "Professional Business Writing — Royal Scientific Society",
+    meta: "10 training hours · Aug 2026",
+    href: "/professional-business-writing-certificate.pdf",
+  },
+  { name: "Coderz ASP.NET Core MVC Training" },
+  { name: "Node.js Backend Training — Hope International" },
+  { name: "Orange Coding School Certificate" },
+  { name: "Advanced Computer Skills" },
+  { name: "Entrepreneurship — Cisco Networking Academy" },
+  { name: "British Council Certificates" },
+  { name: "ISO 9001 Foundation Quality Certification" },
+  { name: "SQL Server Reporting Services (SSRS)" },
 ];
 
 function Certificates() {
@@ -583,18 +588,28 @@ function Certificates() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader eyebrow="Certificates" title="Training & credentials." />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {CERTS.map((c) => (
-            <div key={c} className="glass rounded-xl p-5 flex items-start gap-3 hover:border-primary/40 transition">
-              <span className="grid place-items-center h-10 w-10 rounded-lg bg-primary/10 text-primary shrink-0">
-                <Award className="h-5 w-5" />
-              </span>
-              <div>
-                <div className="text-sm font-medium leading-snug">{c}</div>
-                <div className="mono text-[11px] text-muted-foreground mt-1">Certified</div>
-              </div>
-            </div>
-          ))}
+          {CERTS.map((c) => {
+            const Wrapper: any = c.href ? "a" : "div";
+            return (
+              <Wrapper
+                key={c.name}
+                {...(c.href ? { href: c.href, target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="glass rounded-xl p-5 flex items-start gap-3 hover:border-primary/40 transition"
+              >
+                <span className="grid place-items-center h-10 w-10 rounded-lg bg-primary/10 text-primary shrink-0">
+                  <Award className="h-5 w-5" />
+                </span>
+                <div>
+                  <div className="text-sm font-medium leading-snug">{c.name}</div>
+                  <div className="mono text-[11px] text-muted-foreground mt-1">
+                    {c.meta ?? "Certified"}
+                  </div>
+                </div>
+              </Wrapper>
+            );
+          })}
         </div>
+
       </div>
     </section>
   );
